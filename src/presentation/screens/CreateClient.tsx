@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import { getPosts } from '../../services/serviceClient';
-import Button from '@mui/material/Button';
 import FilledInput from '@mui/material/FilledInput';
 import InputLabel from '@mui/material/InputLabel';
 import InputAdornment from '@mui/material/InputAdornment';

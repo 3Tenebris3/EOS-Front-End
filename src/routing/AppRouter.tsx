@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import UserListScreen from '../presentation/screens/Example';
-import CreateClient from '../presentation/screens/CreateClient';
+import UserListScreen from '../presentation/6.screens/Example';
+import CreateClient from '../presentation/6.screens/CreateClient';
 // Importa otras pantallas según sea necesario
 
 const AppRouter: React.FC = () => (

@@ -40,14 +40,14 @@ const UserListScreen: React.FC = () => {
 
   return (
     <Container>
-      <Typography variant="h4" style={{ margin: '20px 0' }}>
+      <Typography variant="h4" className='mb-3'>
         Lista de Usuarios
       </Typography>
       <MyButton text={'Prueba'} onClick={() => {
               console.log('Prueba');
           }} />
       {users.map((user) => (
-        <UserCard key={user.id} user={user} />
+        <UserCard key={user.id} user={user} className='mb-3' />
       ))}
     </Container>
   );

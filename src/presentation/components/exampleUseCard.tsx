@@ -6,11 +6,12 @@ import { User } from '../../domain/1.entities/example';
 
 interface UserCardProps {
   user: User;
+  className?: string;
 }
 
-const UserCard = ({ user }:UserCardProps) => {
+const UserCard = ({ user, className }:UserCardProps) => {
   return (
-    <Card>
+    <Card className={className}>
       <CardContent>
         <Typography variant="h6">{user.name}</Typography>
         <Typography color="textSecondary">@{user.username}</Typography>

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import CreateClient from '../presentation/screens/CreateClient';
+import CreateClient from '../presentation/6.screens/CreateClient';
 import { FacturaServices } from '../application/5.services/facturaServices';
 
 // Mock de FacturaServices

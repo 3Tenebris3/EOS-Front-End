@@ -11,7 +11,7 @@ import { FacturaServices } from '../../application/5.services/facturaServices';
 import MyButton from '../components/myButton';
 import { Factura } from '../../domain/1.entities/factura';
 
-const CreateClient: React.FC = () => {
+const CreateClient = () => {
     const [valorTotal, setValorTotal] = useState('');
     const [error, setError] = useState<'numerico' | 'alfanumerico' | 'email' | undefined>(undefined);
     const [openSnackbar, setOpenSnackbar] = useState(false);

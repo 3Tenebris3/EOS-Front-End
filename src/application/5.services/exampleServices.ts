@@ -1,8 +1,8 @@
 // src/application/services/UserService.ts
 
-import { GetUsers } from '../../domain/useCases/exampleUseCase';
-import { UserRepositoryImpl } from '../../infrastructure/repositories/exampleRepository';
-import { User } from '../../domain/entities/example';
+import { GetUsers } from '../../domain/4..useCases/exampleUseCase';
+import { UserRepositoryImpl } from '../../infrastructure/3.repositories/exampleRepository';
+import { User } from '../../domain/1.entities/example';
 
 export class UserService {
   private getUsersUseCase: GetUsers;

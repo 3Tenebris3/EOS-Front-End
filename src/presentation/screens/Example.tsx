@@ -1,10 +1,10 @@
 // src/presentation/screens/UserListScreen.tsx
 
 import React, { useEffect, useState } from 'react';
-import { UserService } from '../../application/services/exampleServices';
+import { UserService } from '../../application/5.services/exampleServices';
 import UserCard from '../components/exampleUseCard';
 import { Container, Typography } from '@mui/material';
-import { User } from '../../domain/entities/example';
+import { User } from '../../domain/1.entities/example';
 import MyButton from '../components/myButton';
 
 const userService = new UserService();

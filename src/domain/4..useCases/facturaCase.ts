@@ -1,5 +1,5 @@
-import { IFacturaRepository } from '../../application/interfaces/facturaInterface';
-import { Factura } from '../entities/factura';
+import { IFacturaRepository } from '../../application/2.interfaces/facturaInterface';
+import { Factura } from '../1.entities/factura';
 
 export class PostFactura {
   private facturaRepository: IFacturaRepository;

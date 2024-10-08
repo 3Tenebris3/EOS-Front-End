@@ -1,7 +1,6 @@
-import { PostFactura } from '../../domain/useCases/facturaCase';
-import { User } from '../../domain/entities/example';
-import { FacturaRepositoryImpl } from '../../infrastructure/repositories/facturaRepository';
-import { Factura } from '../../domain/entities/factura';
+import { PostFactura } from '../../domain/4..useCases/facturaCase';
+import { FacturaRepositoryImpl } from '../../infrastructure/3.repositories/facturaRepository';
+import { Factura } from '../../domain/1.entities/factura';
 
 export class FacturaServices {
   private postFacturaUseCase: PostFactura;

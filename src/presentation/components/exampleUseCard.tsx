@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Card, CardContent, Typography } from '@mui/material';
-import { User } from '../../domain/entities/example';
+import { User } from '../../domain/1.entities/example';
 
 interface UserCardProps {
   user: User;

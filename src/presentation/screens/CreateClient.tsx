@@ -9,9 +9,9 @@ import Box from '@mui/material/Box';
 import InputErrorMessage from '../components/InputErrorMessage';
 import SnackbarErrorMessage from '../components/MessageError';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { FacturaServices } from '../../application/services/facturaServices';
+import { FacturaServices } from '../../application/5.services/facturaServices';
 import MyButton from '../components/myButton';
-import { Factura } from '../../domain/entities/factura';
+import { Factura } from '../../domain/1.entities/factura';
 
 const CreateClient: React.FC = () => {
     const [valorTotal, setValorTotal] = useState('');

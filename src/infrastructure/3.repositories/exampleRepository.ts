@@ -1,8 +1,8 @@
 // src/infrastructure/repositories/UserRepositoryImpl.ts
 
-import { IUserRepository } from '../../application/interfaces/exampleInterface';
-import apiClient from '../apis/exampleApi';
-import { User, UserProps } from '../../domain/entities/example';
+import { IUserRepository } from '../../application/2.interfaces/exampleInterface';
+import apiClient from '../apisDeclaration/exampleApi';
+import { User, UserProps } from '../../domain/1.entities/example';
 
 export class UserRepositoryImpl implements IUserRepository {
   async getUsers(): Promise<User[]> {

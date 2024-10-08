@@ -1,7 +1,7 @@
 // src/domain/useCases/GetUsers.ts
 
-import { IUserRepository } from '../../application/interfaces/exampleInterface';
-import { User } from '../entities/example';
+import { IUserRepository } from '../../application/2.interfaces/exampleInterface';
+import { User } from '../1.entities/example';
 
 export class GetUsers {
   private userRepository: IUserRepository;

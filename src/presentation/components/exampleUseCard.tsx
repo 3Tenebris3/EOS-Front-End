@@ -8,9 +8,9 @@ interface UserCardProps {
   user: User;
 }
 
-const UserCard: React.FC<UserCardProps> = ({ user }) => {
+const UserCard = ({ user }:UserCardProps) => {
   return (
-    <Card style={{ marginBottom: 16 }}>
+    <Card>
       <CardContent>
         <Typography variant="h6">{user.name}</Typography>
         <Typography color="textSecondary">@{user.username}</Typography>

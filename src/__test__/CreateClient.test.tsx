@@ -4,7 +4,6 @@ import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import CreateClient from '../presentation/screens/CreateClient';
 import { FacturaServices } from '../application/services/facturaServices';
-import SnackbarErrorMessage from '../presentation/components/MessageError';
 
 // Mock de FacturaServices
 jest.mock('../../application/services/facturaServices', () => {
@@ -21,9 +20,7 @@ describe('CreateClient Component', () => {
     beforeEach(() => {
         // Obtenemos la implementación simulada de FacturaServices
         const facturaService = new FacturaServices();
-        mockPostFactura = facturaService.postFactura;
-
-        render(<CreateClient />);
+        mockPostFactura = facturaService.postFactura as jest.Mock;
     });
 
     afterEach(() => {
@@ -33,11 +30,14 @@ describe('CreateClient Component', () => {
     test('should render the CreateClient component', () => {
         expect(screen.getByText(/Crear Factura/i)).toBeInTheDocument();
         expect(screen.getByLabelText(/Valor Factura/i)).toBeInTheDocument();
+        render(<CreateClient />);
+        expect(screen.getByText(/Crear Factura/i)).toBeInTheDocument();
     });
 
     test('should display error message for non-numeric input', () => {
-        const input = screen.getByLabelText(/Valor Factura/i);
         
+        render(<CreateClient />);
+        const input = screen.getByLabelText(/Valor Factura/i);
         fireEvent.change(input, { target: { value: 'abc' } });
 
         expect(screen.getByText(/Por favor ingrese un valor válido./i)).toBeInTheDocument();

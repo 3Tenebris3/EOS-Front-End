@@ -10,12 +10,11 @@ import Login from '../presentation/6.screens/Login/Login';
 const AppRouter: React.FC = () => (
   <Router>
     <Routes>
-      <Route path="/" element={<UserListScreen />} />
+      <Route path="/" element={<Login />} />
       <Route path="/factura" element={<CreateClient />} />
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
-      {/* Agrega más rutas aquí si es necesario */}
-    </Routes>|
+    </Routes>
   </Router>
 );
 

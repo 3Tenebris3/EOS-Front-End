@@ -1,0 +1,14 @@
+.custom-main-container {
+    height: 90vh;
+    margin: 2% 2% 5px 2%;
+    display: flex;
+    border-radius: 15px;
+    box-shadow: 0 0 10px 5px rgba(202, 198, 198, 0.2);
+}
+
+.custom-background{
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}

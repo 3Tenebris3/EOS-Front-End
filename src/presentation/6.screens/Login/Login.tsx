@@ -22,23 +22,7 @@ const LoginComponent: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Iniciar Sesión</h2>
-      <input
-        type="text"
-        placeholder="Usuario"
-        value={usuario}
-        onChange={(e) => setUsuario(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Contraseña"
-        value={contraseña}
-        onChange={(e) => setContraseña(e.target.value)}
-      />
-      <button onClick={handleLogin}>Iniciar Sesión</button>
-      {mensaje && <p>{mensaje}</p>}
-    </div>
+    
   );
 };
 

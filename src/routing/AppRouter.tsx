@@ -7,7 +7,7 @@ import CreateClient from '../presentation/6.screens/CreateClient';
 import Login from '../presentation/6.screens/Login/Login';
 // Importa otras pantallas según sea necesario
 
-const AppRouter: React.FC = () => (
+const AppRouter = () => (
   <Router>
     <Routes>
       <Route path="/" element={<Login />} />

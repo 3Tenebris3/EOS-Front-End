@@ -15,30 +15,39 @@ const LeftContent = () => {
           <img className="w-100" src="/img/fordLogo.svg" />
         </div>
       </Row>
+      <br />
       <Row className="h-50">
         <Row className="px-5">
-          <Typography variant="h3">Inicio con tu cuenta de usuario</Typography>
-          <TextFieldComponent
-            label="Correo Electrónico"
-            variant="outlined"
-            color="primary"
-            icon={{
-              iconName: "FaRegUserCircle",
-              position: "end",
-              tooltip: "Correo Electrónico",
-            }}
-            onChange={(e) => console.log(e.target.value)}
-          />
-          <PasswordFieldComponent
-            label="Ingresa tu contraseña"
-            color="primary"
-            helperText="Si no te acuerdas de tu contraseña, puedes restablecerla"
-          />
-          <div className="w-100 h-25 d-flex flex-column justify-content-center align-items-center">
+          <div className="w-100 d-flex flex-column align-items-center">
+            <Typography variant="h2">Inicio de Sesión</Typography>
+            <Typography className="m-3" variant="h3">Ingresa tus datos para poder continuar</Typography>
+            <br />
+            <TextFieldComponent
+              label="Correo Electrónico"
+              variant="standard"
+              color="primary"
+              className="w-75"
+              icon={{
+                iconName: "FaRegUserCircle",
+                position: "end",
+                tooltip: "Correo Electrónico",
+              }}
+              onChange={(e) => console.log(e.target.value)}
+            />
+            <br />
+            <PasswordFieldComponent
+              label="Ingresa tu contraseña"
+              color="primary"
+              variant="standard"
+              className="w-75"
+              helperText="Si no te acuerdas de tu contraseña, puedes restablecerla"
+            />
+          </div>
+          <div className="w-100 h-25 d-flex flex-column justify-content-center align-items-center mt-4">
             <ButtonComponent
               variant="contained"
               color="primary"
-              className="w-50 h-50"
+              className="w-50 h-50 mt-3"
               icon={{ iconName: "MdSend" }}
               onClick={() => console.log("Botón solo con ícono presionado")}
               aria-label="Enviar"
@@ -47,14 +56,14 @@ const LeftContent = () => {
               Ingresar
             </ButtonComponent>
             <ButtonComponent
-                variant="text"
-                color="primary"
-                className="w-50 h-50"
-                size="small"
-                onClick={() => console.log("Botón con ícono al final presionado")}
+              variant="text"
+              color="primary"
+              className="w-50 h-25 mt-3"
+              size="small"
+              onClick={() => console.log("Botón con ícono al final presionado")}
             >
-            Olvide mi Contraseña
-          </ButtonComponent>
+              Olvide mi Contraseña
+            </ButtonComponent>
           </div>
         </Row>
       </Row>

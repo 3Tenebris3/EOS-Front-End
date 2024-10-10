@@ -6,16 +6,16 @@ const LeftContent = () => {
 
   return (
     <Col className="bg-secondary w-100 h-100">
-        <Row className="h-100">
+        <Row className="h-25">
            <span>Fila</span> 
         </Row>
-        <Row className="h-100">
+        <Row className="h-25">
            <span>Fila</span> 
         </Row>
-        <Row className="h-100">
+        <Row className="h-25">
            <span>Fila</span> 
         </Row>
-        <Row className="h-100">
+        <Row className="h-25">
            <span>Fila</span> 
         </Row>
     </Col>

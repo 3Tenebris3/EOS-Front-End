@@ -19,7 +19,7 @@ const LoginComponent = () => {
       <div className={style["custom-main-container"]}>
         <div className={'w-50 p-2'}>
           <div className="w-100 h-100 overflow-hidden rounded">
-            <img src='../../../../public/img/login.jpeg' className={"w-100 " + style["custom-img"]} alt="Company Image" />
+            <img src='/img/login.jpeg' className={"w-100 " + style["custom-img"]} alt="Company Image" />
           </div>
         </div>
         <div className={'w-50'}>

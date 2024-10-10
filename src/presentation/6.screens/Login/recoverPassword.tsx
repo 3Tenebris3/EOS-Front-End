@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Col, Row } from "react-bootstrap";
-import MyButton from '../../components/myButton';
 import ReCAPTCHA from 'react-google-recaptcha';
 import TextFieldComponent from '../../components/TextField/TextFieldComponent';
 import { Typography } from '@mui/material';
+import ButtonComponent from '../../components/Button/Button';
 
 interface RecoverPasswordProps {
     onCancel: () => void; // Prop para volver al componente anterior
@@ -12,6 +12,7 @@ interface RecoverPasswordProps {
 interface ImportMetaEnv {
     readonly VITE_RECAPTCHA_SITE_KEY: string;
     readonly VITE_REACT_APP_ENABLE_RECAPTCHA: string;
+    readonly VITE_LOGO: string;
 }
 
 declare global {
@@ -22,15 +23,17 @@ declare global {
 
 const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {
 
-    const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
+    const [email, setEmail] = useState<string>(''); // Estado para el correo electrónico
+    const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null); // Estado del token reCAPTCHA
     const [isVerified, setIsVerified] = useState(false);
 
     const SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
     const ENABLE_RECAPTCHA = import.meta.env.VITE_REACT_APP_ENABLE_RECAPTCHA === 'true'; // Verifica si está habilitado
+    const LOGO = import.meta.env.VITE_LOGO || '';
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        debugger;
+
         if (ENABLE_RECAPTCHA && !recaptchaToken) {
             alert('Por favor, completa el reCAPTCHA.');
             return;
@@ -64,41 +67,67 @@ const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {
         setRecaptchaToken(token);
     };
 
+    // Verifica si el correo está lleno y el reCAPTCHA está validado para habilitar el botón
+    const isFormValid = email.trim() !== '' && recaptchaToken !== null;
 
     return (
         <>
-            <Row className='w-100 h-100'>
-                <Col className="bg-secondary w-10"></Col>
-                <Col className="bg-secondary w-80 h-100">
-                    <Row className='w-100 h-25'></Row>
-                    <Row className="h-10">
-                        <Typography variant="h2">Recuperar contraseña</Typography>
-                    </Row>
-                    <Row className='w-100 h-15'></Row>
-                    <Row className='w-100 h-15'>
+            <Col className="w-100 h-100">
+                <Row className="h-25">
+                    <div className="d-flex justify-content-center align-content-center w-100 p-5 h-100">
+                        <img className="w-100" src={LOGO} />
+                    </div>
+                </Row>
+                <Row className="h-25">
+                    <Row className="px-5">
+                        <Typography variant="h3">Recuperar Contraseña</Typography>
                         <TextFieldComponent
-                            label="Correo electrónico"
-                            variant="standard"
-                            errorMessage="Correo no válido"
-                            helperText="Introduce tu correo electrónico"
-                            showValidationIcon={true}
+                            label="Correo Electrónico"
+                            variant="outlined"
+                            color="primary"
+                            icon={{
+                                iconName: "FaRegUserCircle",
+                                position: "end",
+                                tooltip: "Correo Electrónico",
+                            }}
+                            onChange={(e) => setEmail(e.target.value)} // Actualiza el estado del correo electrónico
                         />
                     </Row>
-                    <Row className="h-15"></Row>
-                    <Row className="h-10">
-                        <ReCAPTCHA sitekey={SITE_KEY} onChange={(token) => console.log(token)} />
+                    <Row className="h-20">
+                        <Col className="w-20 h-50"></Col>
+                        <Col className="w-60 h-50">
+                            <ReCAPTCHA sitekey={SITE_KEY} onChange={onRecaptchaChange} />
+                        </Col>
+                        <Col className="w-40 h-50"></Col>
                     </Row>
-                    <Row className="h-20"></Row>
-                    <Row className="h-10">
-                        <MyButton text={'Enviar'} onClick={() => alert('Formulario enviado')} />
-                    </Row>
-                    <Row className="h-20"></Row>
-                    <Row className="h-10">
-                        <MyButton text={'Cancelar'} onClick={onCancel} /> {/* Botón para regresar */}
-                    </Row>
-                </Col >
-                <Col className="bg-secondary w-10"></Col>
-            </Row >
+                </Row>
+                <Row className="h-50">
+                    <div className="w-100 h-25 d-flex flex-column justify-content-center align-items-center">
+                        <ButtonComponent
+                            variant="contained"
+                            color="primary"
+                            className="w-50 h-50"
+                            icon={{ iconName: "MdSend" }}
+                            onClick={(event) => { handleSubmit(event) }}
+                            aria-label="Enviar"
+                            size="large"
+                            disabled={!isFormValid} // Deshabilita si el formulario no es válido (email vacío o recaptcha no verificado)
+                        >
+                            Recuperar
+                        </ButtonComponent>
+                        <ButtonComponent
+                            variant="text"
+                            color="primary"
+                            className="w-50 h-50"
+                            size="small"
+                            onClick={onCancel}
+                            aria-label="Cancelar"
+                        >
+                            Cancelar
+                        </ButtonComponent>
+                    </div>
+                </Row>
+            </Col>
         </>
     );
 };

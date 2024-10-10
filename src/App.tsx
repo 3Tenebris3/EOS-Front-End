@@ -3,7 +3,7 @@ import AppRouter from './routing/AppRouter';
 
 const App = () => {
   return (
-    <div className="App bg-background">
+    <div className="App">
       <AppRouter /> 
     </div>
   );

@@ -8,7 +8,6 @@ import InputErrorMessage from '../components/InputErrorMessage';
 import SnackbarErrorMessage from '../components/MessageError';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { FacturaServices } from '../../application/5.services/facturaServices';
-import MyButton from '../components/myButton';
 import { Factura } from '../../domain/1.entities/factura';
 
 const CreateClient = () => {
@@ -90,7 +89,6 @@ const CreateClient = () => {
                     />
                     {error && <InputErrorMessage mensaje="Por favor ingrese un valor válido." tipoValidacion={error} />}
 
-                    <MyButton text={'Pagar'} onClick={handleClick} />
                 </Grid>
                 <Grid size={4}></Grid>
             </Grid>

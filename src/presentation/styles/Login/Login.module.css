@@ -17,5 +17,14 @@
 .custom-img{
     border-radius: 8px;
     overflow: hidden;
-    margin-top: -270px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .custom-img{
+        display: none;
+    }
+    
 }

@@ -5,7 +5,11 @@ import ButtonComponent from "../../../../components/Button/Button";
 import PasswordFieldComponent from "../../../../components/PasswordInput/PasswordComponent";
 import { Typography } from "@mui/material";
 
-const LeftContent = () => {
+interface LeftContentProps {
+   onRecoverPassword: () => void; 
+ }
+
+const LeftContent : React.FC<LeftContentProps> = ({ onRecoverPassword }) => {
   const [logo, setLogo] = useState("");
 
   return (
@@ -60,7 +64,7 @@ const LeftContent = () => {
               color="primary"
               className="w-50 h-25 mt-3"
               size="small"
-              onClick={() => console.log("Botón con ícono al final presionado")}
+              onClick={onRecoverPassword}
             >
               Olvide mi Contraseña
             </ButtonComponent>

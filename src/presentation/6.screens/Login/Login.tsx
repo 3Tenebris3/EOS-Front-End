@@ -3,6 +3,7 @@ import style from "../../styles/Login/Login.module.css";
 import { Theme } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import LeftContent from "./ComponentLeft/LeftLogin/LeftContent";
+import RecoverPassword from "./recoverPassword";
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
@@ -13,6 +14,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const LoginComponent = () => {
   const classes = useStyles();
   const [logo, setLogo] = useState('');
+  const [isRecovering, setIsRecovering] = useState(false);
 
   return (
     <div className={`${classes.background} ${style["custom-background"]}`}>
@@ -23,7 +25,11 @@ const LoginComponent = () => {
           </div>
         </div>
         <div className={'w-50'}>
-          <LeftContent />
+        {!isRecovering ? (
+            <LeftContent onRecoverPassword={() => setIsRecovering(true)} /> 
+          ) : (
+            <RecoverPassword onCancel={() => setIsRecovering(false)} /> 
+          )}
         </div>
       </div>
     </div>

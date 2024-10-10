@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import UserListScreen from '../presentation/6.screens/Example';
 import CreateClient from '../presentation/6.screens/CreateClient';
 import Login from '../presentation/6.screens/Login/Login';
+import RecoverPassword from '../presentation/6.screens/Login/recoverPassword';
 // Importa otras pantallas según sea necesario
 
 const AppRouter: React.FC = () => (

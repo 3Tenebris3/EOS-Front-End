@@ -1,14 +1,32 @@
 import React, { useState } from 'react';
-import { User } from '../../../domain/1.entities/example';
-import { Row, Col } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
+import MyButton from '../../components/myButton';
+import ReCAPTCHA from 'react-google-recaptcha';
+import TextFieldComponent from '../../components/TextField/TextFieldComponent';
+import { Typography } from '@mui/material';
 
-const RecoverPassword: React.FC = () => {
-    const [users, setUsers] = useState<User[]>([]);
+interface RecoverPasswordProps {
+    onCancel: () => void; // Prop para volver al componente anterior
+}
+
+interface ImportMetaEnv {
+    readonly VITE_RECAPTCHA_SITE_KEY: string;
+    readonly VITE_REACT_APP_ENABLE_RECAPTCHA: string;
+}
+
+declare global {
+    interface ImportMeta {
+        readonly env: ImportMetaEnv;
+    }
+}
+
+const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {
+
     const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
     const [isVerified, setIsVerified] = useState(false);
 
-    const SITE_KEY = process.env.REACT_APP_RECAPTCHA_SITE_KEY || ''; // Usa la clave desde las variables de entorno
-    const ENABLE_RECAPTCHA = process.env.REACT_APP_ENABLE_RECAPTCHA === 'true'; // Verifica si está habilitado
+    const SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
+    const ENABLE_RECAPTCHA = import.meta.env.VITE_REACT_APP_ENABLE_RECAPTCHA === 'true'; // Verifica si está habilitado
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
@@ -48,22 +66,41 @@ const RecoverPassword: React.FC = () => {
 
 
     return (
-        <Col className="bg-secondary w-100 h-100">
-            <Row className="h-100">
-                <span>Fila</span>
-            </Row>
-            <Row className="h-100">
-                <span>Fila</span>
-            </Row>
-            <Row className="h-100">
-                <span>Fila</span>
-            </Row>
-            <Row className="h-100">
-                <span>Fila</span>
-            </Row>
-        </Col>
+        <>
+            <Row className='w-100 h-100'>
+                <Col className="bg-secondary w-10"></Col>
+                <Col className="bg-secondary w-80 h-100">
+                    <Row className='w-100 h-25'></Row>
+                    <Row className="h-10">
+                        <Typography variant="h2">Recuperar contraseña</Typography>
+                    </Row>
+                    <Row className='w-100 h-15'></Row>
+                    <Row className='w-100 h-15'>
+                        <TextFieldComponent
+                            label="Correo electrónico"
+                            variant="standard"
+                            errorMessage="Correo no válido"
+                            helperText="Introduce tu correo electrónico"
+                            showValidationIcon={true}
+                        />
+                    </Row>
+                    <Row className="h-15"></Row>
+                    <Row className="h-10">
+                        <ReCAPTCHA sitekey={SITE_KEY} onChange={(token) => console.log(token)} />
+                    </Row>
+                    <Row className="h-20"></Row>
+                    <Row className="h-10">
+                        <MyButton text={'Enviar'} onClick={() => alert('Formulario enviado')} />
+                    </Row>
+                    <Row className="h-20"></Row>
+                    <Row className="h-10">
+                        <MyButton text={'Cancelar'} onClick={onCancel} /> {/* Botón para regresar */}
+                    </Row>
+                </Col >
+                <Col className="bg-secondary w-10"></Col>
+            </Row >
+        </>
     );
 };
-
 
 export default RecoverPassword;

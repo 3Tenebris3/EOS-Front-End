@@ -12,6 +12,8 @@ interface PasswordFieldComponentProps {
   helperText?: string;
   loading?: boolean;
   fullWidth?: boolean;
+  className?: string;
+  variant?: 'standard' | 'outlined' | 'filled';
 }
 
 const PasswordFieldComponent: React.FC<PasswordFieldComponentProps> = ({
@@ -21,6 +23,8 @@ const PasswordFieldComponent: React.FC<PasswordFieldComponentProps> = ({
   helperText,
   loading = false,
   fullWidth = true,
+  className,
+  variant,
   ...props
 }) => {
   const [showPassword, setShowPassword] = useState(false);
@@ -41,6 +45,8 @@ const PasswordFieldComponent: React.FC<PasswordFieldComponentProps> = ({
       helperText={helperText}
       loading={loading}
       fullWidth={fullWidth}
+      className={className}
+      variant={variant}
       type={showPassword ? 'text' : 'password'}
       InputProps={{
         endAdornment: (

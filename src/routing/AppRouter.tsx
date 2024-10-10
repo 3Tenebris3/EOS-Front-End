@@ -9,7 +9,7 @@ import RecoverPassword from '../presentation/6.screens/Login/recoveryPassword/re
 import ResetPassword from '../presentation/6.screens/Login/recoveryPassword/resetPassword';
 // Importa otras pantallas según sea necesario
 
-const AppRouter: React.FC = () => (
+const AppRouter = () => (
   <Router>
     <Routes>
       <Route path="/" element={<Login />} />

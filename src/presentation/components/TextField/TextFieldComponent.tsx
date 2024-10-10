@@ -22,6 +22,7 @@ interface TextFieldComponentProps extends Omit<TextFieldProps, 'color'> {
   errorMessage?: string;
   helperText?: string;
   showValidationIcon?: boolean;
+  variant?: 'standard' | 'outlined' | 'filled';
 }
 
 const iconSets: { [key: string]: { [key: string]: IconType } } = {
@@ -38,6 +39,7 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
   errorMessage,
   helperText,
   showValidationIcon = false,
+  variant = 'standard',
   ...props
 }) => {
   const theme = useTheme();
@@ -50,6 +52,7 @@ const TextFieldComponent: React.FC<TextFieldComponentProps> = ({
     <TextField
       color={color}
       error={error}
+      variant={variant}
       helperText={error ? errorMessage : helperText}
       InputProps={{
         startAdornment: icon?.position === 'start' && Icon && !loading ? (

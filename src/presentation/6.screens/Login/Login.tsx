@@ -7,7 +7,7 @@ import RecoverPassword from "./recoveryPassword/recoverPassword";
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {
-    backgroundColor: theme.palette.background.default
+    backgroundColor: theme.palette.primary.main,
   },
 }));
 
@@ -19,9 +19,9 @@ const LoginComponent = () => {
   return (
     <div className={`${classes.background} ${style["custom-background"]}`}>
       <div className={style["custom-main-container"]}>
-        <div className={'w-50 p-2'}>
+        <div className={'w-50 p-4'}>
           <div className="w-100 h-100 position-relative overflow-hidden rounded">
-            <img src='/img/login.jpeg' className={"w-100 " + style["custom-img"]} alt="Company Image" />
+            <img src='/img/login.jpg' className={"h-100 " + style["custom-img"]} alt="Company Image" />
           </div>
         </div>
         <div className={'w-50'}>

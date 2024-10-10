@@ -15,7 +15,7 @@ if (rootElement) {
       <MaterialUIProvider>
         <ThemeProvider theme={theme}>
           <App />
-        </ThemeProvider>s
+        </ThemeProvider>
       </MaterialUIProvider>
     </React.StrictMode>
   );

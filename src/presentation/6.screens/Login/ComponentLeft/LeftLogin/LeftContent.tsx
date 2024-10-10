@@ -4,12 +4,13 @@ import TextFieldComponent from "../../../../components/TextField/TextFieldCompon
 import ButtonComponent from "../../../../components/Button/Button";
 import PasswordFieldComponent from "../../../../components/PasswordInput/PasswordComponent";
 import { Typography } from "@mui/material";
+import style from "../../../../styles/Login/Login.module.css";
 
 interface LeftContentProps {
    onRecoverPassword: () => void; 
  }
 
-const LeftContent : React.FC<LeftContentProps> = ({ onRecoverPassword }) => {
+const LeftContent = ({ onRecoverPassword }: LeftContentProps) => {
   const [logo, setLogo] = useState("");
 
   return (
@@ -23,7 +24,7 @@ const LeftContent : React.FC<LeftContentProps> = ({ onRecoverPassword }) => {
       <Row className="h-50">
         <Row className="px-5">
           <div className="w-100 d-flex flex-column align-items-center">
-            <Typography variant="h2">Inicio de Sesión</Typography>
+            <Typography variant="h2">Bienvenido a Auriga</Typography>
             <Typography className="m-3" variant="h3">Ingresa tus datos para poder continuar</Typography>
             <br />
             <TextFieldComponent
@@ -70,6 +71,11 @@ const LeftContent : React.FC<LeftContentProps> = ({ onRecoverPassword }) => {
             </ButtonComponent>
           </div>
         </Row>
+      </Row>
+      <Row className="h-25">
+      <div className="w-100 h-75 position-relative d-flex justify-content-center align-items-center">
+            <img className={style['custom-logo-eos']} alt="EOS Logo" src="/img/eosLogo.png" />
+        </div>
       </Row>
     </Col>
   );

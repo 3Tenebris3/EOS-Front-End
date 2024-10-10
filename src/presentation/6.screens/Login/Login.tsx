@@ -3,7 +3,7 @@ import style from "../../styles/Login/Login.module.css";
 import { Theme } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import LeftContent from "./ComponentLeft/LeftLogin/LeftContent";
-import RecoverPassword from "./recoverPassword";
+import RecoverPassword from "./recoveryPassword/recoverPassword";
 
 const useStyles = makeStyles((theme: Theme) => ({
   background: {

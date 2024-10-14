@@ -17,7 +17,7 @@ interface ImportMetaEnv {
 }
 
 declare global {
-    interface ImportMeta extends ImportMetaEnv {}
+    interface ImportMeta extends ImportMetaEnv { }
 }
 
 const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {
@@ -32,33 +32,37 @@ const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-
+        debugger
         if (ENABLE_RECAPTCHA && !recaptchaToken) {
             alert('Por favor, completa el reCAPTCHA.');
             return;
         }
+        if (ENABLE_RECAPTCHA) {
+            try {
+                const response = await fetch('http://localhost:5000/api/verify-recaptcha', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ token: recaptchaToken }), // Enviar el token al backend
+                });
 
-        try {
-            const response = await fetch('http://localhost:5000/api/verify-recaptcha', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ token: recaptchaToken }), // Enviar el token al backend
-            });
+                const data = await response.json();
 
-            const data = await response.json();
-
-            if (data.success) {
-                setIsVerified(true);
-                alert('Por favor revise su correo electornico para cambiar su clave');
-                // Aquí puedes proceder a enviar el formulario o hacer cualquier otra acción
-            } else {
-                alert('Error verificando el reCAPTCHA: ' + (data['error-codes'] ? data['error-codes'].join(', ') : ''));
+                if (data.success) {
+                    setIsVerified(true);
+                    alert('Por favor revise su correo electornico para cambiar su clave');
+                    // Aquí puedes proceder a enviar el formulario o hacer cualquier otra acción
+                } else {
+                    alert('Error verificando el reCAPTCHA: ' + (data['error-codes'] ? data['error-codes'].join(', ') : ''));
+                }
+            } catch (error) {
+                console.error('Error al enviar la solicitud de verificación de reCAPTCHA:', error);
+                alert('Hubo un problema al verificar el reCAPTCHA. Intenta de nuevo.');
             }
-        } catch (error) {
-            console.error('Error al enviar la solicitud de verificación de reCAPTCHA:', error);
-            alert('Hubo un problema al verificar el reCAPTCHA. Intenta de nuevo.');
+        }
+        else {
+            alert('Por favor revise su correo electornico para cambiar su clave');
         }
     };
 
@@ -67,7 +71,7 @@ const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {
     };
 
     // Verifica si el correo está lleno y el reCAPTCHA está validado para habilitar el botón
-    const isFormValid = validateEmail(email) && recaptchaToken !== null;
+    const isFormValid = validateEmail(email) && (!ENABLE_RECAPTCHA || recaptchaToken !== null);
 
     return (
         <>
@@ -91,9 +95,11 @@ const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {
                             }}
                             onChange={(e) => setEmail(e.target.value)} // Actualiza el estado del correo electrónico
                         />
-                        <div className="w-100 h-15 d-flex flex-column justify-content-center align-items-center">
-                            <ReCAPTCHA sitekey={SITE_KEY} onChange={onRecaptchaChange} />
-                        </div>
+                        {ENABLE_RECAPTCHA && ( // Mostrar reCAPTCHA solo si está habilitado
+                            <div className="w-100 h-15 d-flex flex-column justify-content-center align-items-center">
+                                <ReCAPTCHA sitekey={SITE_KEY} onChange={onRecaptchaChange} />
+                            </div>
+                        )}
                         <div className="w-100 h-25 d-flex flex-column justify-content-center align-items-center">
                             <ButtonComponent
                                 variant="contained"

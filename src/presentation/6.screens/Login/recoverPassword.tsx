@@ -16,9 +16,7 @@ interface ImportMetaEnv {
 }
 
 declare global {
-    interface ImportMeta {
-        readonly env: ImportMetaEnv;
-    }
+    interface ImportMeta extends ImportMetaEnv {}
 }
 
 const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {

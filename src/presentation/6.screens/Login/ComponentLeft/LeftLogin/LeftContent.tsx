@@ -17,7 +17,7 @@ const LeftContent = ({ onRecoverPassword }: LeftContentProps) => {
     <Col className="w-100 h-100">
       <Row className="h-25">
         <div className="d-flex justify-content-center align-content-center w-100 p-5 h-100">
-          <img className="w-100" src="/img/fordLogo.svg" />
+          <img className="h-75" src="/img/kiaLogo.png" />
         </div>
       </Row>
       <br />

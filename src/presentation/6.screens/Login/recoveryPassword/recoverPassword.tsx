@@ -53,7 +53,7 @@ const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {
 
             if (data.success) {
                 setIsVerified(true);
-                alert('reCAPTCHA verificado correctamente.');
+                alert('Por favor revise su correo electornico para cambiar su clave');
                 // Aquí puedes proceder a enviar el formulario o hacer cualquier otra acción
             } else {
                 alert('Error verificando el reCAPTCHA: ' + (data['error-codes'] ? data['error-codes'].join(', ') : ''));

@@ -72,12 +72,7 @@ const LeftContent = ({ onRecoverPassword }: LeftContentProps) => {
           </div>
         </Row>
       </Row>
-      <Row className="h-25">
-      <div className="w-100 h-75 position-relative d-flex justify-content-center align-items-center">
-            <img className={style['custom-logo-eos']} alt="EOS Logo" src="/img/eosLogo.png" />
-        </div>
-      </Row>
-    </Col>
+      </Col>
   );
 };
 

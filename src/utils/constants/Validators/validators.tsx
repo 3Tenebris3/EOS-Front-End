@@ -22,7 +22,7 @@ export const validatePhoneNumber = (phoneNumber: string): boolean => {
 /**
  * Valida si la contraseña cumple con los requisitos de longitud y complejidad.
  * En este caso, la contraseña debe tener al menos 8 caracteres, y contener al menos
- * una letra mayúscula, una letra minúscula, un número y un carácter especial.
+ * una letra mayúscula, una letra minúscula, un número y un carácter especial(sin guiones).
  * @param password - La contraseña a validar.
  * @returns Verdadero si la contraseña es válida, falso en caso contrario.
  */

@@ -28,7 +28,7 @@ jobs:
       - name: Run ESLint
         run: npm run lint
 
-      # 5) Escaneo SAST con SonarCloud (versión actual recomendada)
+      # 5) Escaneo SAST con SonarCloud
       - name: SonarCloud Scan
         uses: SonarSource/sonarqube-scan-action@v4.1.0
         with:
@@ -40,7 +40,7 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  # 6) JOB para DAST
+  # 6) JOB para DAST con Nikto
   dast-scan:
     runs-on: ubuntu-latest
     needs: build-and-analyze  # Para que este job corra después de "build-and-analyze"
@@ -59,23 +59,24 @@ jobs:
       - name: Run container
         run: docker run -d -p 8080:80 --name eos_front_end eos-front-end-app
 
-      - name: OWASP ZAP baseline scan
+      - name: Nikto scan
         run: |
+          # Ejecutamos Nikto enlazándolo con el contenedor "eos_front_end"
+          # para que Nikto lo conozca como "target".
+          # Montamos el directorio actual para guardar un reporte HTML.
           docker run --rm \
-            --network host \
-            -v $(pwd):/zap/wrk:rw \
-            zaproxy/zap2docker:2.13.0 \
-            zap-baseline.py \
-              -t http://localhost:8080 \
-              -r zap_report.html
+            --link eos_front_end:target \
+            -v $(pwd):/tmp \
+            sullo/nikto \
+            nikto -h http://target:80 \
+                  -output /tmp/nikto_report.html \
+                  -Format htm
 
-
-      - name: Upload ZAP report
+      - name: Upload Nikto report
         uses: actions/upload-artifact@v3
         with:
-          name: zap-report
-          path: zap_report.html
+          name: nikto-report
+          path: nikto_report.html
 
-      # (Opcional) detiene el contenedor
       - name: Stop and remove container
         run: docker rm -f eos_front_end

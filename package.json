@@ -23,9 +23,9 @@
   },
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run dev --prefix server\" \"vite\"",
+    "dev": "concurrently \"vite\"",
     "build": "vite build",
-    "start": "npm run build && npm run start --prefix server",
+    "start": "npm run build",
     "lint": "eslint \"src/**/*.{js,ts,tsx}\""
   },
   "eslintConfig": {

@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1) Clonar el repositorio
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      # 2) Instalar Node (puedes cambiar versión)
+      - name: Set up Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      # 3) Instalar dependencias (npm o yarn)
+      - name: Install dependencies
+        run: npm install
+
+      # 4) Ejecutar ESLint
+      - name: Run ESLint
+        run: npm run lint
+
+      # 5) Escaneo con SonarCloud
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v1.10
+        with:
+          args: >
+            -Dsonar.projectKey=3Tenebris3_EOS-Front-End
+            -Dsonar.organization=3tenebris3
+            -Dsonar.sources=./src
+            -Dsonar.tests=./src
+            -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
+        env:
+          SONAR_TOKEN: ${{ secrets.887ddcb43b8b21ef373a4fe0a8d14511cb946a9f }}

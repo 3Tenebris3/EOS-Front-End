@@ -54,7 +54,7 @@ jobs:
           echo "FROM perl:latest
           RUN apt-get update && apt-get install -y git libwww-perl libssl-dev
           RUN git clone https://github.com/sullo/nikto.git /opt/nikto
-          WORKDIR /opt/nikto
+          WORKDIR /opt/nikto/program
           RUN chmod +x nikto.pl
           ENTRYPOINT [\"perl\", \"nikto.pl\"]" > Dockerfile.nikto
           docker build -t custom-nikto -f Dockerfile.nikto .

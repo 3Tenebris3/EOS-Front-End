@@ -64,8 +64,10 @@ jobs:
           docker run --rm \
             --network host \
             -v $(pwd):/zap/wrk:rw \
-            zaproxy/zap2docker-stable \
-            zap-baseline.py -t http://localhost:8080 -r zap_report.html
+            zaproxy/zap2docker:2.13.0 \
+            zap-baseline.py \
+              -t http://localhost:8080 \
+              -r zap_report.html
 
 
       - name: Upload ZAP report

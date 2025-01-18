@@ -31,7 +31,7 @@ jobs:
 
       # 5) Escaneo con SonarCloud
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v1.10
+        uses: SonarSource/sonarcloud-github-action@main
         with:
           args: >
             -Dsonar.projectKey=3Tenebris3_EOS-Front-End

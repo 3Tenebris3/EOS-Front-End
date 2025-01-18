@@ -37,7 +37,6 @@ jobs:
             -Dsonar.projectKey=3Tenebris3_EOS-Front-End
             -Dsonar.organization=3tenebris3
             -Dsonar.sources=./src
-            -Dsonar.tests=./src
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

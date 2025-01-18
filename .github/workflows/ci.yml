@@ -40,4 +40,4 @@ jobs:
             -Dsonar.tests=./src
             -Dsonar.typescript.lcov.reportPaths=coverage/lcov.info
         env:
-          SONAR_TOKEN: ${{ secrets.887ddcb43b8b21ef373a4fe0a8d14511cb946a9f }}
+          SONAR_TOKEN: ${{ 887ddcb43b8b21ef373a4fe0a8d14511cb946a9f }}

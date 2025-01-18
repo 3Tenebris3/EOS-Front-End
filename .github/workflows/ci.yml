@@ -40,40 +40,50 @@ jobs:
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  # 6) JOB para DAST con Nikto
   dast-scan:
     runs-on: ubuntu-latest
-    needs: build-and-analyze  # Para que este job corra después de "build-and-analyze"
+    needs: build-and-analyze
     steps:
+      # 1) Clonar el repositorio
       - name: Check out code
         uses: actions/checkout@v3
 
-      - name: Set up Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+      # 2) Construir la imagen personalizada de Nikto
+      - name: Build Nikto image
+        run: |
+          echo "FROM perl:latest
+          RUN apt-get update && apt-get install -y git libwww-perl libssl-dev
+          RUN git clone https://github.com/sullo/nikto.git /opt/nikto
+          WORKDIR /opt/nikto
+          RUN chmod +x nikto.pl
+          ENTRYPOINT [\"perl\", \"nikto.pl\"]" > Dockerfile.nikto
+          docker build -t custom-nikto -f Dockerfile.nikto .
 
-      - name: Build image (multi-stage)
+      # 3) Construir y ejecutar la aplicación en un contenedor
+      - name: Build app image
         run: docker build -t eos-front-end-app .
 
-      - name: Run container
+      - name: Run app container
         run: docker run -d -p 8080:80 --name eos_front_end eos-front-end-app
 
+      # 4) Escaneo Nikto
       - name: Nikto scan
         run: |
           docker run --rm \
             --link eos_front_end:target \
             -v $(pwd):/tmp \
-            securecompliance/nikto:latest \
-            nikto -h http://target:80 \
-                  -output /tmp/nikto_report.html \
-                  -Format htm
+            custom-nikto \
+            -h http://target:80 \
+            -output /tmp/nikto_report.html \
+            -Format htm
 
+      # 5) Subir el reporte como artefacto
       - name: Upload Nikto report
         uses: actions/upload-artifact@v3
         with:
           name: nikto-report
           path: nikto_report.html
 
-      - name: Stop and remove container
+      # 6) Detener y eliminar el contenedor
+      - name: Stop and remove app container
         run: docker rm -f eos_front_end

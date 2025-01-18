@@ -61,12 +61,10 @@ jobs:
 
       - name: Nikto scan
         run: |
-          # Usa la imagen cirt/nikto:latest
-          # Enlazamos el contenedor de tu app con el alias "target"
           docker run --rm \
             --link eos_front_end:target \
             -v $(pwd):/tmp \
-            cirt/nikto:latest \
+            securecompliance/nikto:latest \
             nikto -h http://target:80 \
                   -output /tmp/nikto_report.html \
                   -Format htm

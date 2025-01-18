@@ -24,7 +24,7 @@ export default [
       'jsx-a11y': jsxA11yPlugin,
     },
     rules: {
-      'react/no-unknown-property': ['error', { ignore: ['class'] }],
+      'react/no-unknown-property': 'off',
       'react/forbid-dom-props': ['error', { forbid: ['style'] }],
       '@typescript-eslint/explicit-module-boundary-types': 'off',
       '@typescript-eslint/no-explicit-any': 'warn',

@@ -24,7 +24,7 @@ const RecoverPassword: React.FC<RecoverPasswordProps> = ({ onCancel }) => {
 
     const [email, setEmail] = useState<string>(''); // Estado para el correo electrónico
     const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null); // Estado del token reCAPTCHA
-    const [isVerified, setIsVerified] = useState(false);
+    const [, setIsVerified] = useState(false);
 
     const SITE_KEY = import.meta.env.VITE_RECAPTCHA_SITE_KEY || '';
     const ENABLE_RECAPTCHA = import.meta.env.VITE_REACT_APP_ENABLE_RECAPTCHA === 'true'; // Verifica si está habilitado

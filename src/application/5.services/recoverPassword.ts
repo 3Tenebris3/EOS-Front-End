@@ -1,6 +1,3 @@
-import { PostFactura } from '../../domain/4..useCases/facturaCase';
-import { FacturaRepositoryImpl } from '../../infrastructure/3.repositories/facturaRepository';
-import { Factura } from '../../domain/1.entities/factura';
 import { PostRecoverPassword } from '../../domain/4..useCases/recoverPassword';
 import { RecoverPasswordRepositoryImpl } from '../../infrastructure/3.repositories/recoverPasswordRepository';
 import { Login } from '../../domain/1.entities/login';

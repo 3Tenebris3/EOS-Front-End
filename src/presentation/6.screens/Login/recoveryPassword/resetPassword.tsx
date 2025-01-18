@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
 import { Col, Row } from "react-bootstrap";
-import ReCAPTCHA from 'react-google-recaptcha';
 import TextFieldComponent from '../../../components/TextField/TextFieldComponent';
 import { Typography } from '@mui/material';
 import ButtonComponent from '../../../components/Button/Button';
-import { validateEmail, validatePassword } from '../../../../utils/constants/Validators/validators';
-import style from "../../../styles/Login/Login.module.css";
 import PasswordFieldComponent from '../../../components/PasswordInput/PasswordComponent';
-import { useNavigate } from 'react-router-dom';
 // Función para evaluar la fortaleza de la contraseña
 const getPasswordStrength = (password: string) => {
     let strength = 0;
@@ -36,20 +32,9 @@ const getStrengthColor = (strength: number) => {
 };
 
 const ResetPassword = () => {
-    const [password, setPassword] = useState<string>('');
-    const [code, setCode] = useState<string>('');
-    const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
-    const [confirmPassword, setConfirmPassword] = useState<string>('');
-    const navigate = useNavigate(); // Inicializa useNavigate para redirigir
-
-
-    const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
-    };
-
-    const handleConfirmPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setConfirmPassword(event.target.value);
-    };
+    const [password, ] = useState<string>('');
+    const [, setCode] = useState<string>('');
+    const [confirmPassword, ] = useState<string>('');
 
     const LOGO = import.meta.env.VITE_LOGO || '';
 
@@ -58,16 +43,12 @@ const ResetPassword = () => {
         
     };
 
-    const onRecaptchaChange = (token: string | null) => {
-        setRecaptchaToken(token);
-    };
-
     // Obtiene la fortaleza de la contraseña
     const passwordStrength = getPasswordStrength(password);
     const passwordStrengthColor = getStrengthColor(passwordStrength);
 
     // Verifica si el formulario es válido
-    const isFormValid = validatePassword(password) && password === confirmPassword;
+    const isFormValid = password === confirmPassword;
 
     return (
         <div className='h-100 w-100 d-flex justify-content-center align-items-center'>
@@ -86,27 +67,15 @@ const ResetPassword = () => {
                                 color="primary"
                                 variant="outlined"
                                 fullWidth={true}
-                                value={password}
-                                onChange={handlePasswordChange}
                             />
                             <div
                                 className="password-strength-bar"
-                                style={{
-                                    width: '100%',
-                                    height: '5px',
-                                    backgroundColor: passwordStrengthColor,
-                                    marginTop: '5px',
-                                }}
+                                
                             />
                             <Typography
                                 variant="caption"
                                 style={{ color: passwordStrengthColor }}
                             >
-                                {passwordStrength === 1 || passwordStrength === 2
-                                    ? 'Insegura'
-                                    : passwordStrength === 3
-                                        ? 'Moderada'
-                                        : 'Segura'}
                             </Typography>
                         </Row>
                         <Row className="px-5 mb-3">
@@ -115,9 +84,6 @@ const ResetPassword = () => {
                                 color="secondary"
                                 variant="outlined"
                                 fullWidth={true}
-                                value={confirmPassword}
-                                onChange={handleConfirmPasswordChange}
-                                errorMessage={password !== confirmPassword ? 'Las contraseñas no coinciden' : undefined}
                             />
 
                         </Row>

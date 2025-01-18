@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const LoginComponent = () => {
   const classes = useStyles();
-  const [logo, setLogo] = useState('');
   const [isRecovering, setIsRecovering] = useState(false);
 
   return (

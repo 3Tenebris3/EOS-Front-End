@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Col, Row } from "react-bootstrap";
 import TextFieldComponent from "../../../../components/TextField/TextFieldComponent";
 import ButtonComponent from "../../../../components/Button/Button";
 import PasswordFieldComponent from "../../../../components/PasswordInput/PasswordComponent";
 import { Typography } from "@mui/material";
-import style from "../../../../styles/Login/Login.module.css";
 
 interface LeftContentProps {
    onRecoverPassword: () => void; 
  }
 
 const LeftContent = ({ onRecoverPassword }: LeftContentProps) => {
-  const [logo, setLogo] = useState("");
 
   return (
     <Col className="w-100 h-100">

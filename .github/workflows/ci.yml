@@ -61,16 +61,11 @@ jobs:
 
       - name: OWASP ZAP baseline scan
         run: |
-          # Escaneo rápido contra localhost:8080
           docker run --rm \
             --network host \
             -v $(pwd):/zap/wrk:rw \
-            owasp/zap2docker-weekly \
-            zap-baseline.py \
-              -t http://localhost:8080 \
-              -r zap_report.html
-
-
+            zaproxy/zap2docker-stable \
+            zap-baseline.py -t http://localhost:8080 -r zap_report.html
 
 
       - name: Upload ZAP report

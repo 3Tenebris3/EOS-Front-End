@@ -1,4 +1,14 @@
-jobs:
+name: Monitor Containers with Trivy
+
+on:
+  push:
+    branches:
+      - main # Ejecutar cuando se haga push en la rama main
+  schedule:
+    - cron: "0 * * * *" # Ejecutar cada hora
+  workflow_dispatch: # Permitir ejecución manual desde la interfaz de GitHub
+
+jobs: 
   monitor:
     runs-on: ubuntu-latest
     steps:

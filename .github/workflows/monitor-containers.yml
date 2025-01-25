@@ -45,7 +45,7 @@ jobs:
         run: |
           trivy image nginx:stable > report-app-main.txt
 
-      # 8. Mostrar reportes
+      # 8. Mostrar reportesss
       - name: Display reports
         run: |
           echo "Report for mi-proyecto:"

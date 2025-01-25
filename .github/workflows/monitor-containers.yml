@@ -30,35 +30,25 @@ jobs:
         run: |
           docker run -d --name mi-proyecto nginx:stable
 
-      # 5. Levantar el contenedor 'otro-contenedor'
+      # 5. Escanear la imagen de 'mi-proyecto'
+      - name: Scan mi-proyecto image
+        run: |
+          trivy image nginx:stable > report-mi-proyecto.txt
+
+      # 6. Levantar el contenedor 'app-main'
       - name: Run app-main container
         run: |
           docker run -d --name app-main nginx:stable
 
-      # 6. Escanear el primer contenedor
-      - name: Scan Container 1
+      # 7. Escanear la imagen de 'app-main'
+      - name: Scan app-main image
         run: |
-          container_id=$(docker ps -qf "name=mi-proyecto")
-          if [ -z "$container_id" ]; then
-            echo "Container 'mi-proyecto' not running"
-          else
-            trivy fs --severity CRITICAL /var/lib/docker/overlay2/$container_id > report-container1.txt
-          fi
-
-      # 7. Escanear el segundo contenedor
-      - name: Scan Container 2
-        run: |
-          container_id=$(docker ps -qf "name=app-main")
-          if [ -z "$container_id" ]; then
-            echo "Container 'app-main' not running"
-          else
-            trivy fs --severity CRITICAL /var/lib/docker/overlay2/$container_id > report-container2.txt
-          fi
+          trivy image nginx:stable > report-app-main.txt
 
       # 8. Mostrar reportes
       - name: Display reports
         run: |
-          echo "Report for Container 1:"
-          cat report-container1.txt || echo "No report for Container 1"
-          echo "Report for Container 2:"
-          cat report-container2.txt || echo "No report for Container 2"
+          echo "Report for mi-proyecto:"
+          cat report-mi-proyecto.txt || echo "No report for mi-proyecto"
+          echo "Report for app-main:"
+          cat report-app-main.txt || echo "No report for app-main"

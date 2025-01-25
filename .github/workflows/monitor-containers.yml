@@ -27,9 +27,10 @@ jobs:
           wget -qO- https://github.com/aquasecurity/trivy/releases/download/v0.43.1/trivy_0.43.1_Linux-64bit.tar.gz | tar xz
           sudo mv trivy /usr/local/bin/
 
-      # 4. Escanear el primer contenedor
-      - name: Scan Container 1
+            # 4. Levantar y escanear el primer contenedor
+      - name: Run and Scan Container 1
         run: |
+          docker run -d --name mi-proyecto nginx:stable
           container_id=$(docker ps -qf "name=mi-proyecto")
           if [ -z "$container_id" ]; then
             echo "Container 'mi-proyecto' not running"
@@ -37,15 +38,17 @@ jobs:
             trivy fs --severity CRITICAL /var/lib/docker/overlay2/$container_id > report-container1.txt
           fi
 
-      # 5. Escanear el segundo contenedor
-      - name: Scan Container 2
+      # 5. Levantar y escanear el segundo contenedor
+      - name: Run and Scan Container 2
         run: |
-          container_id=$(docker ps -qf "name=otro-contenedor")
+          docker run -d --name app-main nginx:stable
+          container_id=$(docker ps -qf "name=app-main")
           if [ -z "$container_id" ]; then
-            echo "Container 'otro-contenedor' not running"
+            echo "Container 'app-main' not running"
           else
             trivy fs --severity CRITICAL /var/lib/docker/overlay2/$container_id > report-container2.txt
           fi
+
 
       # 6. Mostrar reportes
       - name: Display reports

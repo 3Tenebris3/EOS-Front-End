@@ -10,7 +10,7 @@ jobs:
   monitor:
     runs-on: ubuntu-latest
     steps:
-      # 1. Clonar el repositorio
+      # 1. Clonar el repositoriooo
       - name: Check out code
         uses: actions/checkout@v3
 
